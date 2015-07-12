@@ -1,6 +1,5 @@
 package com.morganh.destroyer.tvreminder;
 
-import com.MorganHolbart.TVReminderAPI.API;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -26,11 +25,16 @@ public class Show {
 
     }
 
-    public int getShowID () {
-        return id;
+    @Override
+    public String toString() {
+        return "Show [showid= " + id + ", title=" + title + "]";
     }
+
+    public int getID () { return id; }
+    public void setID (int newID) { id = newID; }
 
     public String getTitle() {
         return title;
     }
+    public void setTitle(String newTitle) { title = newTitle; }
 }

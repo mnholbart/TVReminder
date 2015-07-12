@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-
-import com.MorganHolbart.TVReminderAPI.API;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
@@ -16,10 +14,16 @@ import java.io.IOException;
 
 public class TVFavorites extends Activity {
 
+    private MySQLiteHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tvfavorites);
+
+        db = MySQLiteHelper.getInstance(this);
+
+
     }
 
     protected void searchShow() {
@@ -28,7 +32,7 @@ public class TVFavorites extends Activity {
         try { //Show exists
             JsonObject show = API.GetShow(editText.toString());
             Show newShow = new Show(show);
-
+            db.addShow(newShow);
         } catch (IOException e) { //Show doesn't exist
 
         }
