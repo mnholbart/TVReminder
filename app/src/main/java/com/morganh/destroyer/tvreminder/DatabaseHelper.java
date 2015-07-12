@@ -10,9 +10,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static DatabaseHelper sInstance;
 
-    private static final String DATABASE_NAME = "ShowDB";
-    private static final String DATABASE_TABLE = "Shows";
-    private static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "ShowDB";
+    public static final String DATABASE_TABLE = "Shows";
+    public static final int DATABASE_VERSION = 1;
 
     public static synchronized DatabaseHelper getInstance(Context context) {
 
