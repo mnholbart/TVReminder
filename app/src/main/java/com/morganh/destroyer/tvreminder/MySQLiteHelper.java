@@ -41,21 +41,21 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // SQL statement to create book table
+        // SQL statement to create shows table
         String CREATE_SHOW_TABLE = "CREATE TABLE " + TABLE_SHOWS_NAME + " ( " +
                 "id INTEGER PRIMARY KEY, " +
                 "title TEXT )";
 
-        // create books table
+        // create shows table
         db.execSQL(CREATE_SHOW_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older books table if existed
+        // Drop older shows table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SHOWS_NAME);
 
-        // create fresh books table
+        // create fresh shows table
         this.onCreate(db);
     }
 
