@@ -5,4 +5,8 @@
     <string name="title_activity_tvfavorites">TVFavorites</string>
     <string name="SearchShow_message">Enter Show Name</string>
     <string name="SearchButton_message">Search</string>
+    <string name="SearchButton_Position">SearchButtonPosition</string>
+    <string name="FavoriteButton_Position">FavoriteButtonPosition</string>
+    <string name="title_activity_favorites">favorites</string>
+    <string name="title_activity_viewshow">viewshow</string>
 </resources>

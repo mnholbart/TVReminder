@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+style="@style/TwoWayView"
+android:gravity="center" >
+
+<ImageView
+    android:id="@+id/icon"
+    android:onClick="viewShow"
+    android:clickable="true"
+    android:minWidth="210dp"
+    android:minHeight="295dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Add To Favorites"
+    android:id="@+id/addToFavorites"
+    android:onClick="favoriteShow"
+    android:layout_centerHorizontal="true"
+    android:clickable="true"
+    android:layout_below="@+id/icon" />
+</RelativeLayout>

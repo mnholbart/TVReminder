@@ -1,10 +1,14 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.morganh.destroyer.tvreminder.TVFavorites"
+    tools:context="com.morganh.destroyer.tvreminder.SearchActivity"
     android:id="@+id/searchContainer">
 
     <LinearLayout
@@ -30,25 +34,18 @@
 
     </LinearLayout>
 
-    <Button
+
+
+
+    <org.lucasr.twowayview.TwoWayView
+        android:id="@+id/horizontalScroll"
+        style="@style/TwoWayView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add To Favorites"
-        android:id="@+id/addToFavorites"
-        android:onClick="favoriteShow"
-        android:layout_below="@+id/linearLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:clickable="false"/>
-
-    <ImageView
-        android:id="@+id/showThumbnail"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        android:layout_below="@+id/addToFavorites"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
+        android:layout_centerHorizontal="true"
+        android:drawSelectorOnTop="false"
+        tools:context=".MainActivity"
+        android:dividerHeight="10.0sp"
+        android:layout_below="@+id/linearLayout" />
 
 </RelativeLayout>

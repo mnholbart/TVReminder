@@ -21,9 +21,11 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.google.code.gson:gson:2.2.4'
     compile files('libs/android-async-http-1.4.8.jar')
     compile files('D:/Android/AndroidStudioProjects/TVReminder/TVReminderApp/libs/android-async-http-1.4.8.jar')
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.loopj.android:android-async-http:1.4.8'
+    compile 'org.lucasr.twowayview:twowayview:0.1.4'
+    compile 'com.android.support:design:22.2.1'
 }

@@ -7,15 +7,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import org.json.JSONObject;
-
 
 public class MainActivity extends Activity {
+
+    MySQLiteHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        db = MySQLiteHelper.getInstance(this);
     }
 
     @Override
@@ -40,13 +42,26 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void loadFavorites(View v) {
-        launchFavoriteTitleView();
+    public void loadSearchShows(View v) {
+        launchSearchShowsActivity();
     }
 
-    private void launchFavoriteTitleView() {
-        Intent i = new Intent(this, TVFavorites.class);
+    private void launchSearchShowsActivity() {
+        Intent i = new Intent(this, SearchActivity.class);
         startActivity(i);
+    }
+
+    public void loadFavorites(View v) {
+        launchFavoritesActivity();
+    }
+
+    private void launchFavoritesActivity() {
+        Intent i = new Intent(this, FavoritesActivity.class);
+        startActivity(i);
+    }
+
+    public void resetDB(View v) {
+        db.clearDatabase();
     }
 }
 

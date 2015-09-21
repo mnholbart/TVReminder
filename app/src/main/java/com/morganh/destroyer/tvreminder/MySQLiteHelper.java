@@ -22,6 +22,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     // Books Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_TITLE = "title";
+    private static final String KEY_JSON = "json";
 
     private static final String[] COLUMNS = {KEY_ID,KEY_TITLE};
 
@@ -44,7 +45,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         // SQL statement to create shows table
         String CREATE_SHOW_TABLE = "CREATE TABLE " + TABLE_SHOWS_NAME + " ( " +
                 "id INTEGER PRIMARY KEY, " +
-                "title TEXT )";
+                "title TEXT, " +
+                "json TEXT )";
 
         // create shows table
         db.execSQL(CREATE_SHOW_TABLE);
@@ -57,6 +59,16 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         // create fresh shows table
         this.onCreate(db);
+    }
+
+    public void clearDatabase() {
+
+        Log.d("DB", "Clearing DB - Current and Final DB Contents");
+        getAllShows();
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SHOWS_NAME);
+        this.onCreate(db);
+        getAllShows();
     }
 
     public void addShow(Show show){
@@ -72,6 +84,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_TITLE, show.getTitle());
         values.put(KEY_ID, show.getID());
+        values.put(KEY_JSON, show.getJsonSource().toString());
 
         db.insert(TABLE_SHOWS_NAME,
                 null,
@@ -87,7 +100,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         Cursor cursor =
                 db.query(TABLE_SHOWS_NAME, // a. table
                         COLUMNS, // b. column names
-                        " showid = ?", // c. selections
+                        " id = ?", // c. selections
                         new String[] { String.valueOf(showID) }, // d. selections args
                         null, // e. group by
                         null, // f. having
@@ -101,7 +114,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
         Show show = new Show();
         show.setTitle(cursor.getString(1));
-        show.setID(cursor.getInt(2));
+        show.setID(cursor.getInt(0));
+        show.setJsonSource(cursor.getString(2));
 
         Log.d("getShow(" + showID + ")", show.toString());
 
@@ -119,8 +133,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 show = new Show();
-                show.setTitle((cursor.getString(1)));
-                show.setID(cursor.getInt(2));
+                show.setJsonSource(cursor.getString(2));
+                show.setTitle(cursor.getString(1));
+                show.setID(cursor.getInt(0));
 
                 shows.add(show);
             } while (cursor.moveToNext());
@@ -138,6 +153,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("id", show.getID());
         values.put("title", show.getTitle());
+        values.put("json", show.getJsonSource().toString());
 
         int nRows = db.update(TABLE_SHOWS_NAME,
                 values,
@@ -156,11 +172,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         db.delete(TABLE_SHOWS_NAME,
-                KEY_ID+ " = ?",
-                new String[] { String.valueOf(show.getID()) });
+                KEY_ID + " = ?",
+                new String[]{String.valueOf(show.getID())});
         db.close();
 
         Log.d("deleteShow", show.toString());
+    }
+
+    public boolean contains(int id) {
+        Show show = getShow(id);
+        if (show == null)
+            return false;
+        else return true;
     }
 
 }
